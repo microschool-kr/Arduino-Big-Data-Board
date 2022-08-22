@@ -67,7 +67,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-//Sonar
+  //Sonar
   long duration, distance;
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -77,29 +77,30 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
   distance = duration/58;
 
-//Dust
- digitalWrite(ledP,LOW); // power on the LED  
- delayMicroseconds(280);  
- voMeasured = analogRead(dustPin); // read the dust value  
- delayMicroseconds(40);  
- digitalWrite(ledP,HIGH); // turn the LED off  
- delayMicroseconds(9680);  
- // 0 - 5V mapped to 0 - 1023 integer values  
- calcVoltage = voMeasured * (5.0 / 1024.0);  
- dustDensity = 0.17 * calcVoltage - 0.1;  
- dustDensity = dustDensity*1000; // ug/m3  
- smoothDensity = dustDensity * 0.05 + smoothDensity * 0.95; 
- if(smoothDensity <0)
- {
-  smoothDensity = 0; 
- }
-//Vibration
-data = analogRead(shake);
+  //Dust
+   digitalWrite(ledP,LOW); // power on the LED  
+   delayMicroseconds(280);  
+   voMeasured = analogRead(dustPin); // read the dust value  
+   delayMicroseconds(40);  
+   digitalWrite(ledP,HIGH); // turn the LED off  
+   delayMicroseconds(9680);  
+   // 0 - 5V mapped to 0 - 1023 integer values  
+   calcVoltage = voMeasured * (5.0 / 1024.0);  
+   dustDensity = 0.17 * calcVoltage - 0.1;  
+   dustDensity = dustDensity*1000; // ug/m3  
+   smoothDensity = dustDensity * 0.05 + smoothDensity * 0.95; 
+   if(smoothDensity <0)
+   {
+    smoothDensity = 0; 
+   }
+  
+  //Vibration
+  data = digitalRead(shake);
 
-   sec = second();
-   Minute = minute();
-   Hour = hour();
-   Time = Hour*3600+Minute*60+sec;
+  sec = second();
+  Minute = minute();
+  Hour = hour();
+  Time = Hour*3600+Minute*60+sec;
 
 //CDS
    cdsVal = analogRead(cdsPin_anal);        //조도값 측정
@@ -127,7 +128,4 @@ data = analogRead(shake);
   Serial.print(", ");
   Serial.println(Time);
   delay(T);
-
-   
-
 }
